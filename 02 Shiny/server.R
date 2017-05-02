@@ -1,4 +1,5 @@
 # server.R
+library(plotly)
 require(ggplot2)
 require(dplyr)
 require(shiny)
@@ -247,6 +248,13 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
                            rownames = FALSE,
                            extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
   })
+  
+  g <- list(
+    scope = 'usa',
+    projection = list(type = 'albers usa'),
+    showlakes = TRUE,
+    lakecolor = toRGB('white')
+  )
   
   output$map1 <- renderPlotly({plot_geo(df7(), locationmode = 'USA-states') %>%
       add_trace(z= ~PercentBS, text = ~hover, color = ~PercentBS, colors = 'Purples', locations = ~State) %>%

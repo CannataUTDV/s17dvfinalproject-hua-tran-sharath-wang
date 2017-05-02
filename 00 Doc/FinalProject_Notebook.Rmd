@@ -26,7 +26,14 @@ This notebook documents the education attainment levels and age-adjusted death r
 4. Click on download
 5. Save the file under a folder accessible by Tableau
 
+**How to setup for ETL**
+
+1. Set your working directory to 01 Data 
+2. Download PreETL_Death.csv from data.world: https://data.world/ninaxhua/s-17-dv-final-project
+3. Put PreETL_Death.csv into CSVs folder in the DataVisualizations folder
+
 # **ETL Script**
+The ETL script joins the Pre_ETL_Death dataframe with the education dataframe from US Census by AreaName (the state name)
 ``` {r echo=FALSE}
 source("../01 Data/ETL_Script.R")
 ```
@@ -90,10 +97,11 @@ US map of states filled by Bachelor's degree attainment (top) and AADR (bottom).
 ### **Blending - AADR and High Income**
 ![](../03 Visualizations/NH_Blending_In.png)
 ![](../03 Visualizations/NH_Blending_Out.png)
+This visualization displays the use of Tableau Data Blending and Set IDs. “total_100G" is a measure created using the formula “(m_100G_more + f_100G_more) / total”, which outputs the proportion of individuals who made $100,000 or more within a particular state. Afterwards, the set “max_high_income” contains the states that had a proportion of 0.10 or higher. Those in “max_high_income” had similar AADR values (range: 19,316 in Connecticut and 21,938 in Virginia) with the exception of D.C. which hosted a relatively high AADR (24,620). On the other hand, the states that were not in the set had a wider range of AADR values. It was interesting to observe that Mississippi had the highest AADR (27,595) and Hawaii had the lowest AADR (17,222) while remaining in the set of states that did not have a large proportion of individuals with higher incomes. Our data suggests that states with a higher proportion of individuals who make $100,000 or more host similar AADR while states with a lower proportion host a range of AADR. The range could be explained by causes not included in our dataset, but is worth further exploring with different census datasets.
 
 ## **Shiny**
 #### **Published Shiny app link**
-https://steventran.shinyapps.io/project6_shiny/
+https://steventran.shinyapps.io/finalproject/
 
 ### **Boxplot - Total death by cause**
 ![](../03 Visualizations/sBoxplot - AmtDeath.PNG)
@@ -115,7 +123,7 @@ Scatterplot displays aggregate AADR vs fraction of BS attainment for each state.
 ![](../03 Visualizations/sBarchart - AADR year, cause full.PNG)
 Full Barchart - Note the gradually decreasing average AADR line (red). This shows the steady lowering of death rate over time.
 
-![](../03 Visualizations/sBarchart - AADR year, cause full.PNG)
+![](../03 Visualizations/sBarchart - AADR year, cause excerpt.PNG)
 Zoomed excerpt of the barchart. Note that heart disease and cancer are the leading causes of death across these states.
 
 ### **Bachelor's Degree Attainment: Female**

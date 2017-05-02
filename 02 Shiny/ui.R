@@ -1,4 +1,5 @@
 #ui.R
+library(plotly)
 require(shiny)
 require(shinydashboard)
 

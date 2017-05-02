@@ -10,7 +10,7 @@ require(DT)
 #DO THIS BEFORE RUNNING THE SCRIPT======================================================
 # set your working directory to 01 Data 
 #Download PreETL_Death.csv from data.world: https://data.world/ninaxhua/s-17-dv-final-project
-#Put PreETL_HospitalData.csv into CSVs folder in the DataVisualizations folder
+#Put PreETL_Death.csv into CSVs folder in the DataVisualizations folder
 #=======================================================================================
 
 education = query(
