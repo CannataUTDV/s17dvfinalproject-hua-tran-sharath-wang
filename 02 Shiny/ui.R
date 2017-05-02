@@ -13,7 +13,8 @@ dashboardPage(
       menuItem("SetID - BS Attainment: Female", tabName = "NH2", icon = icon("dashboard")),
       menuItem("SetID - BS Attainment: Male", tabName = "NH3", icon = icon("dashboard")),
       menuItem("Map - AADR and Fraction BS", tabName = "SNT3", icon = icon("dashboard")),
-      menuItem("Boxplot - Amount of Deaths per Cause", tabName = "NH4", icon = icon("dashboard"))
+      menuItem("Boxplot - Amount of Deaths per Cause", tabName = "NH4", icon = icon("dashboard")),
+      menuItem("Histogram - AADR", tabName = "NH5", icon = icon("dashboard"))
    
       
     )
@@ -136,9 +137,22 @@ tabItem(tabName = "NH4",
           ),
           tabPanel("Boxplot - Amount of Deaths per Cause", plotOutput("boxplot9", height = 800))
           )
-        )
+        ),
 #End NH4 Tab ___________________________________
-
+#Begin NH5 Tab ___________________________________
+tabItem(tabName = "NH5",
+        tabsetPanel(
+                tabPanel("Data",
+                         actionButton(inputId = "click10",  label = "To get data, click here"),
+                         hr(), # Add space after button.
+                         'Here is data for the "Histogram - AADR" tab',
+                         hr(),
+                         DT::dataTableOutput("histogramData10")
+                ),
+                tabPanel("Histogram - AADR", plotlyOutput("histogram10"), height = 1000)
+        )
+)
+#End NH5 Tab ___________________________________
     )
   )
 )
