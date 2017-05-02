@@ -243,9 +243,9 @@ shinyServer(function(input, output) {
       query(
         data.world(propsfile = "www/.data.world"),
         dataset="cannata/superstoreorders", type="sql",
-        query="select Shipping_Cost, Container
-        from SuperStoreOrders
-        where Container = 'Small Box'"
+        query="select AADR, cause
+        from Death
+        where Cause = 'All Causes"
       ) # %>% View()
     }
     else {
