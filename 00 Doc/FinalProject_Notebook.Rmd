@@ -2,9 +2,9 @@
 title: "Association Between Age-Adjusted Death Rate and Bachelor's Degree Attainment"
 author: "N. Hua, S. Tran, V. Sharath, K. Wang"
 output:
+  html_notebook: default
   html_document:
     toc: yes
-  html_notebook: default
   pdf_document: default
 ---
 # **Introduction** 
@@ -36,7 +36,7 @@ source("../01 Data/ETL_Script.R")
 ## **Tableau**
 
 ### **Scatterplot - AADR vs Fraction BS by State**
-![](../03 Visualizations/Scatterplot - AADR, BS.png)</center>
+![](../03 Visualizations/Scatterplot - AADR, BS.png)</div></center>
 Scatterplot displays aggregate AADR vs fraction of BS attainment for each state. Note the negative correlation between AADR and BS attainment.
 
 ### **Barchart - AADR by Year**

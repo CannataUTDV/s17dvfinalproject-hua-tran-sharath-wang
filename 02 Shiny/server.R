@@ -269,7 +269,8 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
                   data.world(propsfile = "www/.data.world"),
                   dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
                   query = "select Death.cause, Death.amt_death, Death.State, Death.year 
-                  from Death"
+                  from Death
+                  where Death.cause != 'All Causes'"
           )
           tdf9
 
@@ -280,13 +281,11 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
                                                     extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
   })
   
-  output$boxplot9 <- renderPlotly({
-          p <- ggplot(df9()) + 
-                  geom_boxplot(aes(x=cause, y=amt_death, colour=State)) +
+  output$boxplot9 <- renderPlot({
+                ggplot(df9()) + 
+                  geom_boxplot(aes(x=cause, y=amt_death)) +
                   theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5)) +
-                  theme(plot.margin = unit(c(5,5,5,5), "cm")) + 
-                  coord_cartesian(ylim = c(0,60000000))
-          ggplotly(p)
+                  coord_cartesian(ylim = c(0,80000))
   })
   
   #End NH4 Tab ___________________________

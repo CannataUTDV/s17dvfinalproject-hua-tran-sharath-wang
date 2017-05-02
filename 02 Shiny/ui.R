@@ -127,16 +127,16 @@ tabItem(tabName = "SNT3",
 #Begin NH4 Tab --------------------------------
 tabItem(tabName = "NH4",
         tabsetPanel(
-                tabPanel("Data",
-                         actionButton(inputId = "click9",  label = "To get data, click here"),
-                         hr(), # Add space after button.
-                         'Here is data for the "Boxplot - Amount of Deaths per Cause" tab',
-                         hr(),
-                         DT::dataTableOutput("boxData9")
-                ),
-                tabPanel("Boxplot - Amount of Deaths per Cause", plotlyOutput("boxplot9"), height = 1000)
+          tabPanel("Data",
+                   actionButton(inputId = "click9",  label = "To get data, click here"),
+                   hr(), # Add space after button.
+                   'Here is data for the "Boxplot - Amount of Deaths per Cause" tab',
+                   hr(),
+                   DT::dataTableOutput("boxData9")
+          ),
+          tabPanel("Boxplot - Amount of Deaths per Cause", plotOutput("boxplot9", height = 800))
+          )
         )
-)
 #End NH4 Tab ___________________________________
 
     )
