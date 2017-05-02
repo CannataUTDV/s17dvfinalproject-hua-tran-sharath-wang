@@ -30,3 +30,13 @@
       ggplotly(p)
   })
   # End Histogram Tab ___________________________________________________________
+
+Histogram caption: 
+This is a histogram of AADR by state. The x-axis are AADR bins starting at 580 and ending at 980 with increments of 20. The y-axis are the counts of states 
+that fall into each bin. The histogram looks to be normal distribution with a small skew to the right. Additionally, there is a mini cluster in the 880-960
+AADR range. Most states fall into the 700-800 AADR range. 
+
+Boxplot Caption: 
+This is a boxplot for each of the causes of death. The x-axis shows every cause of death, and the y-axis are the counts of the sepcific deatch cause for every state 
+every year. The Data shows that HEart Disease and Cancer show the highest counts of death and also the greatest variabiliy. Box plots for other causes 
+of death have less variability and less counts. 
