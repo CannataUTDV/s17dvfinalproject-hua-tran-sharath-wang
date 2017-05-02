@@ -223,7 +223,7 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
   })  
   #End NH3 Tab ____________________________  
   
-#Begin SNT2 Tab----------------------
+#Begin SNT3 Tab----------------------
   df7 <- eventReactive(input$click7, {
     print("Getting from data.world")
     tdf7 = query(
@@ -231,41 +231,35 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
       dataset = "ninaxhua/s-17-dv-project-6", type = "sql",
       query = "select Death.State,
                   (sum(Death.f_bs)+sum(Death.m_bs))/(sum(Death.`edu.males`)+sum(Death.`edu.females`)) as PercentBS,
-                  sum(Death.AADR)
+                  sum(Death.AADR) as AADR
       
                 from Death
                 group by State"
     )
     tdf7$hover = with(tdf7, paste(State, '<br>', "% BS Attainment", PercentBS))
+    tdf7$hover2 = with(tdf7, paste(State, '<br>', "AADR", AADR))
     tdf7
     
   })
-  
-  tdf7 = query(
-    data.world(propsfile = "www/.data.world"),
-    dataset = "ninaxhua/s-17-dv-project-6", type = "sql",
-    query = "select Death.State,
-    (sum(Death.f_bs)+sum(Death.m_bs))/(sum(Death.`edu.males`)+sum(Death.`edu.females`)) as PercentBS,
-    sum(Death.AADR)
-    
-    from Death
-    group by State"
-  )
-  tdf7$hover = with(tdf7, paste(State, '<br>', "% BS Attainment", PercentBS))
-  
   
   output$mapData7 <- renderDataTable({DT::datatable(df7(),
                            rownames = FALSE,
                            extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
   })
   
-  output$map1 <- renderPlotly({plot_geo(tdf7, locationmode = 'USA-states') %>%
+  output$map1 <- renderPlotly({plot_geo(df7(), locationmode = 'USA-states') %>%
       add_trace(z= ~PercentBS, text = ~hover, color = ~PercentBS, colors = 'Purples', locations = ~State) %>%
       colorbar(title = "Attainment %") %>%
       layout(title = "Bachelor's Degree Attainment", geo = g)
   })
   
-  #End SNT2 Tab ___________________________
+  output$map2 <- renderPlotly({plot_geo(df7(), locationmode = 'USA-states') %>%
+      add_trace(z= ~AADR, text = ~hover2, color = ~AADR, colors = 'Purples', locations = ~State) %>%
+      colorbar(title = "AADR") %>%
+      layout(title = "AADR", geo = g)
+  })
+  
+  #End SNT3 Tab ___________________________
 })
 
 

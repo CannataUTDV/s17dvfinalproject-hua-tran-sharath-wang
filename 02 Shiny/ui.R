@@ -108,7 +108,7 @@ tabItem(tabName = "NH3",
         )
 ),
 #End NH3 Tab ___________________________________
-#Begin SNT2 Tab --------------------------------
+#Begin SNT3 Tab --------------------------------
 tabItem(tabName = "SNT3",
         tabsetPanel(
           tabPanel("Data",
@@ -118,10 +118,10 @@ tabItem(tabName = "SNT3",
                    hr(),
                    DT::dataTableOutput("mapData7")
           ),
-          tabPanel("Map - PercentBS", plotOutput("map1"))
+          tabPanel("Map - PercentBS", plotlyOutput("map1"), hr(), plotlyOutput("map2"))
           )
         )
-#End SNT2 Tab ___________________________________
+#End SNT3 Tab ___________________________________
     )
   )
 )
