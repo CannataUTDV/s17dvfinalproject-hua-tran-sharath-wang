@@ -7,30 +7,47 @@ dashboardPage(
   ),
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Barchart - AADR by State,Cause", tabName = "SNT1", icon = icon("dashboard")),
+      menuItem("Crosstab - AADR by State, Cause", tabName = "SNT1", icon = icon("dashboard")),
+      menuItem("Scatter - Death rate v Educatione", tabName = "SNT2", icon = icon("dashboard")),
       menuItem("Barchart - AADR by Year,Cause", tabName = "NH1", icon = icon("dashboard")),
       menuItem("SetID - BS Attainment: Female", tabName = "NH2", icon = icon("dashboard")),
-      menuItem("SetID - BS Attainment: Male", tabName = "NH3", icon = icon("dashboard"))
+      menuItem("SetID - BS Attainment: Male", tabName = "NH3", icon = icon("dashboard")),
+      menuItem("Map - AADR and Fraction BS", tabName = "SNT3", icon = icon("dashboard"))
       
     )
   ),
   dashboardBody(    
     tabItems(
-      
+
 #Begin SNT1 Tab --------------------------------
-      tabItem(tabName = "SNT1",
-        tabsetPanel(
-          tabPanel("Data",
+tabItem(tabName = "SNT1",
+  tabsetPanel(
+    tabPanel("Data",  
+             sliderInput("AADR1", "AADR_Low:", 
+                         min = 0, max = 2000,  value = 1000),
+             sliderInput("AADR2", "AADR_Medium:", 
+                         min = 2000, max = 10000,  value = 5000),
              actionButton(inputId = "click1",  label = "To get data, click here"),
              hr(), # Add space after button.
-             'Here is data for the "Barchart - AADR by State,Cause" tab',
-             hr(),
-             DT::dataTableOutput("barchartData1")
-          ),
-          tabPanel("Barchart", "Black = Sum of AADR per Cause, Red = Average Sum of Sales per State, and  Blue = (Sum of AADR per Cause - Average Sum of AADR per State)", plotOutput("barchartPlot1", height=10000))
-        )
-      ),
+             DT::dataTableOutput("data1")
+    ),
+    tabPanel("Crosstab", plotOutput("plot1", height=750))
+  )
+),
 #End SNT1 Tab ___________________________________
+
+#Begin SNT2 Tab --------------------------------
+tabItem(tabName = "SNT2",
+        tabsetPanel(
+          tabPanel("Data",
+                   actionButton(inputId = "click8",  label = "To get data, click here"),
+                   hr(), # Add space after button.
+                   DT::dataTableOutput("data8")
+          ),
+          tabPanel("Scatter Plot", plotOutput("plot8", height=750))
+        )
+),
+#End SNT2 Tab ___________________________________
 
 #Begin NH1 Tab --------------------------------
 tabItem(tabName = "NH1",
@@ -42,7 +59,8 @@ tabItem(tabName = "NH1",
                    hr(),
                    DT::dataTableOutput("barchartData2")
           ),
-          tabPanel("Barchart", "Black = Sum of AADR per Cause, Red = Average Sum of AADR per Year, and  Blue = (Sum of AADR per Cause - Average Sum of AADR per Year)", plotOutput("barchartPlot2", height=3000))
+          tabPanel("Full Barchart", "Black = Sum of AADR per Cause, Red = Average Sum of AADR per Year, and  Blue = (Sum of AADR per Cause - Average Sum of AADR per Year)", plotOutput("barchartPlot2_All", height=800)),
+          tabPanel("Zoomed Barchart", "Black = Sum of AADR per Cause, Red = Average Sum of AADR per Year, and  Blue = (Sum of AADR per Cause - Average Sum of AADR per Year)", plotOutput("barchartPlot2_Zoom", height=2000))
         )
 ),
 #End NH1 Tab ___________________________________
@@ -88,8 +106,22 @@ tabItem(tabName = "NH3",
                 ),
                 tabPanel("Barchart", plotOutput("barchartPlot6", height=750))
         )
-)
+),
 #End NH3 Tab ___________________________________
+#Begin SNT2 Tab --------------------------------
+tabItem(tabName = "SNT3",
+        tabsetPanel(
+          tabPanel("Data",
+                   actionButton(inputId = "click7",  label = "To get data, click here"),
+                   hr(), # Add space after button.
+                   'Here is data for the "Map - AADR and Fraction BS" tab',
+                   hr(),
+                   DT::dataTableOutput("mapData7")
+          ),
+          tabPanel("Map - PercentBS", plotOutput("map1"))
+          )
+        )
+#End SNT2 Tab ___________________________________
     )
   )
 )

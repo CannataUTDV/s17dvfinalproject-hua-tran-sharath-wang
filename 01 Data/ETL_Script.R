@@ -31,7 +31,7 @@ death = rawDeath %>% dplyr::select(., -`113_CAUSE_NAME`) %>% plyr::rename(., c("
 df = full_join(x = education, y = death, by = "AreaName")
 
 # rename columns
-df = rename(df, edu.males = males, edu.females = females, edu.total = total25)
+df = dplyr::rename(df, edu.males = males, edu.females = females, edu.total = total25)
 # determine column types 
 str(df)
 
