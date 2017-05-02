@@ -147,9 +147,9 @@ tabItem(tabName = "NH5",
                          hr(), # Add space after button.
                          'Here is data for the "Histogram - AADR" tab',
                          hr(),
-                         DT::dataTableOutput("histogramData10")
+                         DT::dataTableOutput("histogramData1")
                 ),
-                tabPanel("Histogram - AADR", plotlyOutput("histogram10"), height = 1000)
+                tabPanel("Histogram - AADR", plotOutput("histogramPlot1", height = 800))
         )
 )
 #End NH5 Tab ___________________________________

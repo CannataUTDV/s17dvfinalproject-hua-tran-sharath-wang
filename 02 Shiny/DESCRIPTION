@@ -4,3 +4,4 @@ License: GPL-3
 DisplayMode: Showcase
 Tags: tableau
 Type: Shiny
+Description:This notebook documents the education attainment levels and age-adjusted death rates (AADR) for different causes of death across the United States. The data has been organized to explore the relationship between education attainment and AAMR between 1999 and 2013.

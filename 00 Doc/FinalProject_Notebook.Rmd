@@ -2,9 +2,9 @@
 title: "Association Between Age-Adjusted Death Rate and Bachelor's Degree Attainment"
 author: "N. Hua, S. Tran, V. Sharath, K. Wang"
 output:
-  html_notebook: default
   html_document:
     toc: yes
+  html_notebook: default
   pdf_document: default
 ---
 # **Introduction** 
@@ -35,12 +35,24 @@ source("../01 Data/ETL_Script.R")
 
 ## **Tableau**
 
+### **Boxplot - Total death by cause**
+![](../03 Visualizations/Boxplot - AmtDeath.PNG)
+This is a boxplot for each of the causes of death. The x-axis shows every cause of death, and the y-axis are the counts of the sepcific deatch cause for every state 
+every year. The Data shows that HEart Disease and Cancer show the highest counts of death and also the greatest variabiliy. Box plots for other causes 
+of death have less variability and less counts. 
+
+### **Histogram - AADR for all causes in 2010**
+![](../03 Visualizations/Histogram - AADR.PNG)
+This is a histogram of AADR by state. The x-axis are AADR bins starting at 580 and ending at 980 with increments of 20. The y-axis are the counts of states 
+that fall into each bin. The histogram looks to be normal distribution with a small skew to the right. Additionally, there is a mini cluster in the 880-960
+AADR range. Most states fall into the 700-800 AADR range. 
+
 ### **Scatterplot - AADR vs Fraction BS by State**
-![](../03 Visualizations/Scatterplot - AADR, BS.png)</div></center>
+![](../03 Visualizations/Scatterplot - AADR, BS.png)
 Scatterplot displays aggregate AADR vs fraction of BS attainment for each state. Note the negative correlation between AADR and BS attainment.
 
 ### **Barchart - AADR by Year**
-![](../03 Visualizations/Barchart - AADR year, cause.png)</center>
+![](../03 Visualizations/Barchart - AADR year, cause.png)
 Barchart displays the sum of the AADR per cause from 1999-2013. 
 The average sum of AADR for all causes do not vary greatly per year.
 Heart Disease, Cancer, and Stroke have consistently higher sums of AADR than the average AADR for all causes.  
@@ -48,70 +60,91 @@ Heart Disease, Cancer, and Stroke have consistently higher sums of AADR than the
 ### **Bachelor's Degree Attainment: Female**
 
 **High Level**
-![](../03 Visualizations/SetID - F_High_BS.png)</center>
+![](../03 Visualizations/SetID - F_High_BS.png)
 Barchart displays females who've attained a Bachelor's Degree. 
 The page only shows the set of states that hosted high levels of female BS attainment (0.15-0.25).
 Compared to males, females also had a greater amount of states with high levels. 
 
 **Low Level**
-![](../03 Visualizations/SetID - F_Low_BS.png)</center> 
+![](../03 Visualizations/SetID - F_Low_BS.png) 
 Barchart displays females who've attained a Bachelor's Degree. 
 The page only shows the set of states that hosted low levels of female BS attainment (<0.15).
 
 ### **Bachelor's Degree Attainment: Male**
 
 **High Level**
-![](../03 Visualizations/SetID - M_High_BS.png)</center> 
+![](../03 Visualizations/SetID - M_High_BS.png) 
 Barchart displays males who've attained a Bachelor's Degree. 
 The page only shows the set of states that hosted high levels of male BS attainment (0.15-0.25).
 
 **Low Level**
-![](../03 Visualizations/SetID - M_Low_BS.png)</center> 
+![](../03 Visualizations/SetID - M_Low_BS.png) 
 Barchart displays males who've attained a Bachelor's Degree. 
 The page only shows the set of states that hosted low levels of male BS attainment (<0.15).
 
+### **Map - AADR and BS Attainment Level Localization**
+![](../03 Visualizations/Map - AADR.png)
+![](../03 Visualizations/Map - FractionBS.png)
+US map of states filled by Bachelor's degree attainment (top) and AADR (bottom). Note that localization of low degree attainment and high AADR coincide.
+
+### **Blending - AADR and High Income**
+![](../03 Visualizations/NH_Blending_In.png)
+![](../03 Visualizations/NH_Blending_Out.png)
 
 ## **Shiny**
 #### **Published Shiny app link**
 https://steventran.shinyapps.io/project6_shiny/
 
+### **Boxplot - Total death by cause**
+![](../03 Visualizations/sBoxplot - AmtDeath.PNG)
+This is a boxplot for each of the causes of death. The x-axis shows every cause of death, and the y-axis are the counts of the sepcific deatch cause for every state 
+every year. The Data shows that HEart Disease and Cancer show the highest counts of death and also the greatest variabiliy. Box plots for other causes 
+of death have less variability and less counts. 
+
+### **Histogram - AADR for all causes in 2010**
+![](../03 Visualizations/sHistogram - AADR.PNG)
+This is a histogram of AADR by state. The x-axis are AADR bins starting at 580 and ending at 980 with increments of 20. The y-axis are the counts of states 
+that fall into each bin. The histogram looks to be normal distribution with a small skew to the right. Additionally, there is a mini cluster in the 880-960
+AADR range. Most states fall into the 700-800 AADR range. 
+
 ### **Scatterplot - AADR vs Fraction BS by State**
-![](../03 Visualizations/sScatterplot-AADR, BS.png)</center>
+![](../03 Visualizations/sScatterplot-AADR, BS.png)
 Scatterplot displays aggregate AADR vs fraction of BS attainment for each state. Note the negative correlation between AADR and BS attainment.
 
 ### **Barchart - AADR by Year**
-![](../03 Visualizations/sBarchart - AADR year, cause full.PNG)</center>
+![](../03 Visualizations/sBarchart - AADR year, cause full.PNG)
 Full Barchart - Note the gradually decreasing average AADR line (red). This shows the steady lowering of death rate over time.
 
-![](../03 Visualizations/sBarchart - AADR year, cause full.PNG)</center>
+![](../03 Visualizations/sBarchart - AADR year, cause full.PNG)
 Zoomed excerpt of the barchart. Note that heart disease and cancer are the leading causes of death across these states.
 
 ### **Bachelor's Degree Attainment: Female**
 
 **High Level**
-![](../03 Visualizations/SetID - F_High_BS.PNG)</center>
+![](../03 Visualizations/sSetID - F_High_BS.PNG)
 Barchart displays females who've attained a Bachelor's Degree. 
 The page only shows the set of states that hosted high levels of female BS attainment (0.15-0.25).
 Compared to males, females also had a greater amount of states with high levels. 
 
 **Low Level**
-![](../03 Visualizations/SetID - F_Low_BS.PNG)</center> 
+![](../03 Visualizations/sSetID - F_Low_BS.PNG) 
 Barchart displays females who've attained a Bachelor's Degree. 
 The page only shows the set of states that hosted low levels of female BS attainment (<0.15).
 
 ### **Bachelor's Degree Attainment: Male**
 
 **High Level**
-![](../03 Visualizations/SetID - M_High_BS.PNG)</center> 
+![](../03 Visualizations/sSetID - M_High_BS.PNG) 
 Barchart displays males who've attained a Bachelor's Degree. 
 The page only shows the set of states that hosted high levels of male BS attainment (0.15-0.25).
 
 **Low Level**
-![](../03 Visualizations/SetID - M_Low_BS.PNG)</center> 
+![](../03 Visualizations/sSetID - M_Low_BS.PNG)
 Barchart displays males who've attained a Bachelor's Degree. 
 The page only shows the set of states that hosted low levels of male BS attainment (<0.15).
 
-## **Map - AADR and BS Attainment Level Localization**
-![](../03 Visualizations/sMap - AADR, BS.PNG)</center>
+### **Map - AADR and BS Attainment Level Localization**
+![](../03 Visualizations/sMap - AADR, BS.PNG)
 US map of states filled by Bachelor's degree attainment (top) and AADR (bottom). Note that localization of low degree attainment and high AADR coincide.
+
 

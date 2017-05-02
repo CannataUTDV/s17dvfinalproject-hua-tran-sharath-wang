@@ -289,32 +289,28 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
   })
   
   #End NH4 Tab ___________________________
-  #Begin NH5 Tab----------------------
-  df10 <- eventReactive(input$click10, {
-          print("Getting from data.world")
-          tdf10 = query(
-                  data.world(propsfile = "www/.data.world"),
-                  dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
-                  query = "select Death.State, Death.year, Death.AADR, Death.cause from Death"
-          )
-          tdf10 %>% dplyr::select(cause,unique(State),year, AADR) %>% dplyr::filter(cause == 'All Causes', year == '2010')
-          tdf10
-          
+# Begin Histgram Tab ------------------------------------------------------------------
+  dfh1 <- eventReactive(input$click10, {
+    print("Getting from data.world")
+    query(
+      data.world(propsfile = "www/.data.world"),
+      dataset="ninaxhua/s-17-dv-final-project", type="sql",
+      query="select AADR, cause, State, year
+      from Death
+      where cause = 'All Causes' and year = 2010")
   })
   
-  output$histogramData10 <- renderDataTable({DT::datatable(df10(),
-                                                           rownames = FALSE,
-                                                           extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
+  output$histogramData1 <- renderDataTable({DT::datatable(dfh1(), rownames = FALSE,
+                                                          extensions = list(Responsive = TRUE, 
+                                                                            FixedHeader = TRUE)
+  )
   })
   
-  output$histogram10 <- renderPlotly({
-          p <- ggplot(df10()) +
-                  geom_histogram(aes(x=AADR)) +
-                  theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5))
-          ggplotly(p)
+  output$histogramPlot1 <- renderPlot({ggplot(dfh1()) +
+    geom_histogram(aes(x=AADR)) +
+    theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5))
   })
-  
-  #End NH5 Tab ___________________________
+  # End Histogram Tab ___________________________________________________________
 })
 
 
