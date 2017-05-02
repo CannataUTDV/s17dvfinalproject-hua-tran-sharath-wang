@@ -19,9 +19,9 @@ if(online0) {
     order by 1"
   ) 
 } else {
-  file_path = "www/Death.csv"
+  file_path = "www/SuperStoreOrders.csv"
   df <- readr::read_csv(file_path) 
-  globals <- df %>% dplyr::select(year, amt_death) %>% dplyr::distinct()
+  globals <- df %>% dplyr::select(Order_Date, Sales) %>% dplyr::distinct()
 }
-globals$Order_Date <- lubridate::year(globals$year)
+globals$Order_Date <- lubridate::year(globals$Order_Date)
 

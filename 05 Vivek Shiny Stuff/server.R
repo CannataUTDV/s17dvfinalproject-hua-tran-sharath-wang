@@ -205,17 +205,18 @@ shinyServer(function(input, output) {
       print("Getting from data.world")
       df <- query(
         data.world(propsfile = "www/.data.world"),
-        dataset="cannata/superstoreorders", type="sql",
-        query="select Category, Sales, Region, Order_Date
-        from SuperStoreOrders
-        where (? = 'All' or Region in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?))",
+        dataset="ninaxhua/Death", type="sql",
+        query="select cause, State, year, amt_death
+        from Death
+        where (Death.year = '2010' and Death.cause = 'All Causes')
+        group by cause, State, year, amt_death",
         queryParameters = region_list5 ) # %>% View()
     }
     else {
       print("Getting from csv")
-      file_path = "www/Death.csv"
+      file_path = "www/SuperStoreOrders.csv"
       df <- readr::read_csv(file_path)
-      df %>% dplyr::select(cause, amt_death, State, year) %>% dplyr::filter(State %in% input$selectedBoxplotRegions | input$selectedBoxplotRegions == "All") # %>% View()
+      df %>% dplyr::select(Category, Sales, Region, Order_Date) %>% dplyr::filter(Region %in% input$selectedBoxplotRegions | input$selectedBoxplotRegions == "All") # %>% View()
     }
     })
   
@@ -224,13 +225,20 @@ shinyServer(function(input, output) {
                                                 FixedHeader = TRUE)
   )
   })
-
   
-
+  dfbp2 <- eventReactive(c(input$click5, input$boxSalesRange1), {
+    dfbp1() %>% dplyr::filter(Sales >= input$boxSalesRange1[1] & Sales <= input$boxSalesRange1[2]) # %>% View()
+  })
+  
+  dfbp3 <- eventReactive(c(input$click5, input$range5a), {
+    dfbp2() %>% dplyr::filter(lubridate::year(Order_Date) == as.integer(input$range5a) & lubridate::quarter(Order_Date) == (4 * (input$range5a - as.integer(input$range5a))) + 1) %>% dplyr::arrange(desc(Order_Date)) # %>% View()
+  })
+    
   output$boxplotPlot1 <- renderPlotly({
-    #View(dfbp2())
-    p <- ggplot(dfbp1()) + 
-      geom_boxplot(aes(x=cause, y=amt_death, colour=State)) +
+    #View(dfbp3())
+    p <- ggplot(dfbp3()) + 
+      geom_boxplot(aes(x=Category, y=Sales, colour=Region)) + 
+      ylim(0, input$boxSalesRange1[2]) +
       theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5))
     ggplotly(p)
   })
@@ -263,7 +271,7 @@ shinyServer(function(input, output) {
   })
   
   output$histogramPlot1 <- renderPlotly({p <- ggplot(dfh1()) +
-      geom_histogram(aes(AADR)) +
+      geom_histogram(aes(x=AADR)) +
       theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5))
       ggplotly(p)
   })
