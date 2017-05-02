@@ -19,6 +19,7 @@ shinyServer(function(input, output) {
   online2 = reactive({input$rb2})
   
   online3 = reactive({input$rb3})
+  
 # Begin SNT1 Tab WORKS-----------------------------------------------
 
   df1 <- eventReactive(input$click1, {
@@ -260,6 +261,64 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
   })
   
   #End SNT3 Tab ___________________________
+  
+  #Begin NH4 Tab----------------------
+  df9 <- eventReactive(input$click9, {
+          print("Getting from data.world")
+          tdf9 = query(
+                  data.world(propsfile = "www/.data.world"),
+                  dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
+                  query = "select Death.cause, Death.amt_death, Death.State, Death.year 
+                  from Death"
+          )
+          tdf9
+
+  })
+  
+  output$boxData9 <- renderDataTable({DT::datatable(df9(),
+                                                    rownames = FALSE,
+                                                    extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
+  })
+  
+  output$boxplot9 <- renderPlotly({
+          p <- ggplot(df9()) + 
+                  geom_boxplot(aes(x=cause, y=amt_death, colour=State)) +
+                  theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5)) +
+                  theme(plot.margin = unit(c(5,5,5,5), "cm")) + 
+                  coord_cartesian(ylim = c(0,60000000))
+          ggplotly(p)
+  })
+  
+  #End NH4 Tab ___________________________
+  
+  #Begin NH5 Tab----------------------
+  df10 <- eventReactive(input$click10, {
+          print("Getting from data.world")
+          tdf10 = query(
+                  data.world(propsfile = "www/.data.world"),
+                  dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
+                  query = "select Death.cause, Death.amt_death, Death.State, Death.year 
+                  from Death"
+          )
+          tdf10
+          
+  })
+  
+  output$histogramData10 <- renderDataTable({DT::datatable(df10(),
+                                                    rownames = FALSE,
+                                                    extensions = list(Responsive = TRUE, FixedHeader = TRUE) )
+  })
+  
+  # output$histogram10 <- renderPlotly({
+  #         p <- ggplot(df9()) + 
+  #                 geom_boxplot(aes(x=cause, y=amt_death, colour=State)) +
+  #                 theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5)) +
+  #                 theme(plot.margin = unit(c(5,5,5,5), "cm")) + 
+  #                 coord_cartesian(ylim = c(0,60000000))
+  #         ggplotly(p)
+  # })
+  
+  #End NH5 Tab ___________________________
 })
 
 

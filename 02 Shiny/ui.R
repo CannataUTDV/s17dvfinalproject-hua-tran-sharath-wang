@@ -12,7 +12,9 @@ dashboardPage(
       menuItem("Barchart - AADR by Year,Cause", tabName = "NH1", icon = icon("dashboard")),
       menuItem("SetID - BS Attainment: Female", tabName = "NH2", icon = icon("dashboard")),
       menuItem("SetID - BS Attainment: Male", tabName = "NH3", icon = icon("dashboard")),
-      menuItem("Map - AADR and Fraction BS", tabName = "SNT3", icon = icon("dashboard"))
+      menuItem("Map - AADR and Fraction BS", tabName = "SNT3", icon = icon("dashboard")),
+      menuItem("Boxplot - Amount of Deaths per Cause", tabName = "NH4", icon = icon("dashboard"))
+   
       
     )
   ),
@@ -120,8 +122,23 @@ tabItem(tabName = "SNT3",
           ),
           tabPanel("Map - PercentBS", plotlyOutput("map1"), hr(), plotlyOutput("map2"))
           )
-        )
+        ),
 #End SNT3 Tab ___________________________________
+#Begin NH4 Tab --------------------------------
+tabItem(tabName = "NH4",
+        tabsetPanel(
+                tabPanel("Data",
+                         actionButton(inputId = "click9",  label = "To get data, click here"),
+                         hr(), # Add space after button.
+                         'Here is data for the "Boxplot - Amount of Deaths per Cause" tab',
+                         hr(),
+                         DT::dataTableOutput("boxData9")
+                ),
+                tabPanel("Boxplot - Amount of Deaths per Cause", plotlyOutput("boxplot9"), height = 1000)
+        )
+)
+#End NH4 Tab ___________________________________
+
     )
   )
 )
