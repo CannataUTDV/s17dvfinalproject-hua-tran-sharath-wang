@@ -250,17 +250,17 @@ shinyServer(function(input, output) {
       print("Getting from data.world")
       query(
         data.world(propsfile = "www/.data.world"),
-        dataset="cannata/superstoreorders", type="sql",
-        query="select AADR, cause
+        dataset="ninaxhua/Death", type="sql",
+        query="select AADR, cause, State, year
         from Death
-        where Cause = 'All Causes"
+        where cause = 'All Causes' and year = '2010' "
       ) # %>% View()
     }
     else {
       print("Getting from csv")
       file_path = "www/Death.csv"
       df <- readr::read_csv(file_path)
-      df %>% dplyr::select(cause,unique(State),year, AADR) %>% dplyr::filter(cause == 'All Causes', year == '2010') # %>% View()
+      df %>% dplyr::select(cause, (State),year, AADR) %>% dplyr::filter(cause == 'All Causes', year == '2010') # %>% View()
     }
     })
   

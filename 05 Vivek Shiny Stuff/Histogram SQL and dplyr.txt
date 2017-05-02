@@ -1,0 +1,32 @@
+  # Begin Histgram Tab ------------------------------------------------------------------
+  dfh1 <- eventReactive(input$click4, {
+    if(online4() == "SQL") {
+      print("Getting from data.world")
+      query(
+        data.world(propsfile = "www/.data.world"),
+        dataset="ninaxhua/Death", type="sql",
+        query="select AADR, cause, State, year
+        from Death
+        where cause = 'All Causes' and year = '2010' "
+      ) # %>% View()
+    }
+    else {
+      print("Getting from csv")
+      file_path = "www/Death.csv"
+      df <- readr::read_csv(file_path)
+      df %>% dplyr::select(cause, (State),year, AADR) %>% dplyr::filter(cause == 'All Causes', year == '2010') # %>% View()
+    }
+    })
+  
+  output$histogramData1 <- renderDataTable({DT::datatable(dfh1(), rownames = FALSE,
+                                                  extensions = list(Responsive = TRUE, 
+                                                  FixedHeader = TRUE)
+  )
+  })
+  
+  output$histogramPlot1 <- renderPlotly({p <- ggplot(dfh1()) +
+      geom_histogram(aes(x=AADR)) +
+      theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5))
+      ggplotly(p)
+  })
+  # End Histogram Tab ___________________________________________________________
