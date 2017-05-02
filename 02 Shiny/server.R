@@ -8,6 +8,7 @@ require(readr)
 require(DT)
 require(tidyr)
 require(leaflet)
+require(plotly)
 
 shinyServer(function(input, output) { 
   online1 = reactive({input$rb1})
@@ -23,7 +24,7 @@ shinyServer(function(input, output) {
   df1 <- eventReactive(input$click1, {
     query(
       data.world(propsfile = "www/.data.world"),
-      dataset="ninaxhua/s-17-dv-project-5",
+      dataset="ninaxhua/s-17-dv-final-project",
       query="select Death.State as State,
       Death.cause as Cause_of_Death,
       sum(Death.AADR) as sum_AADR,
@@ -55,7 +56,7 @@ shinyServer(function(input, output) {
   df8 <- eventReactive(input$click8, {
     query(
       data.world(propsfile = "www/.data.world"),
-      dataset="ninaxhua/s-17-dv-project-5", type="sql",
+      dataset="ninaxhua/s-17-dv-final-project", type="sql",
       query="select Death.State,
       sum(AADR) as sum_AADR,
       (sum(Death.m_bs)/sum(Death.`edu.males`) + sum(Death.f_bs)/sum(Death.`edu.females`))/2 as `Percent BS`
@@ -81,7 +82,7 @@ shinyServer(function(input, output) {
     print("Getting from data.world")
     tdf2_1 = query(
       data.world(propsfile = "www/.data.world"),
-      dataset = "ninaxhua/s-17-dv-project-6", type = "sql",
+      dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
       query = "select Death.year,
                 Death.cause,
                 sum(Death.AADR)
@@ -132,7 +133,7 @@ shinyServer(function(input, output) {
   df3 <- eventReactive(input$click3, {
           query(
                   data.world(propsfile = "www/.data.world"),
-                  dataset = "ninaxhua/s-17-dv-project-6", type = "sql",
+                  dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
                   query = "select Death.State, sum(Death.f_bs)/sum(Death.`edu.females`) as f_bs_frac 
 from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) between 0.15 and 0.25"
           )
@@ -154,7 +155,7 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
   df4 <- eventReactive(input$click4, {
           query(
                   data.world(propsfile = "www/.data.world"),
-                  dataset = "ninaxhua/s-17-dv-project-6", type = "sql",
+                  dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
                   query = "select Death.State, sum(Death.f_bs)/sum(Death.`edu.females`) as f_bs_frac 
                   from Death group by Death.State 
                   having sum(Death.f_bs)/sum(Death.`edu.females`) < 0.15"
@@ -179,7 +180,7 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
   df5 <- eventReactive(input$click5, {
           query(
                   data.world(propsfile = "www/.data.world"),
-                  dataset = "ninaxhua/s-17-dv-project-6", type = "sql",
+                  dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
                   query = "select Death.State, sum(Death.m_bs)/sum(Death.`edu.males`) as m_bs_frac 
                   from Death group by Death.State 
                   having sum(Death.m_bs)/sum(Death.`edu.males`) between 0.15 and 0.25"
@@ -202,7 +203,7 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
   df6 <- eventReactive(input$click6, {
           query(
                   data.world(propsfile = "www/.data.world"),
-                  dataset = "ninaxhua/s-17-dv-project-6", type = "sql",
+                  dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
                   query = "select Death.State, sum(Death.m_bs)/sum(Death.`edu.males`) as m_bs_frac 
                   from Death group by Death.State 
                   having sum(Death.m_bs)/sum(Death.`edu.males`) < 0.15"
@@ -228,15 +229,14 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
     print("Getting from data.world")
     tdf7 = query(
       data.world(propsfile = "www/.data.world"),
-      dataset = "ninaxhua/s-17-dv-project-6", type = "sql",
+      dataset = "ninaxhua/s-17-dv-final-project", type = "sql",
       query = "select Death.State,
-                  (sum(Death.f_bs)+sum(Death.m_bs))/(sum(Death.`edu.males`)+sum(Death.`edu.females`)) as PercentBS,
+                  ((sum(Death.f_bs)+sum(Death.m_bs))/(sum(Death.`edu.males`)+sum(Death.`edu.females`))*100) as PercentBS,
                   sum(Death.AADR) as AADR
-      
                 from Death
                 group by State"
     )
-    tdf7$hover = with(tdf7, paste(State, '<br>', "% BS Attainment", PercentBS))
+    tdf7$hover = with(tdf7, paste(State, '<br>', "% BS Attainment", round(PercentBS, 2)))
     tdf7$hover2 = with(tdf7, paste(State, '<br>', "AADR", AADR))
     tdf7
     
