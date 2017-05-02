@@ -1,5 +1,6 @@
 #ui.R
 library(plotly)
+library(RColorBrewer)
 require(shiny)
 require(shinydashboard)
 
@@ -122,7 +123,7 @@ tabItem(tabName = "SNT3",
                    hr(),
                    DT::dataTableOutput("mapData7")
           ),
-          tabPanel("Map - PercentBS", plotlyOutput("map1"), hr(), plotlyOutput("map2"))
+          tabPanel("Map - PercentBS", plotlyOutput("map2", height = 400), hr(), plotlyOutput("map1", height = 400))
           )
         ),
 #End SNT3 Tab ___________________________________

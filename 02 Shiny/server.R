@@ -1,5 +1,6 @@
 # server.R
 library(plotly)
+library(RColorBrewer)
 require(ggplot2)
 require(dplyr)
 require(shiny)
@@ -238,8 +239,8 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
                 from Death
                 group by State"
     )
-    tdf7$hover = with(tdf7, paste(State, '<br>', "% BS Attainment", round(PercentBS, 2)))
-    tdf7$hover2 = with(tdf7, paste(State, '<br>', "AADR", AADR))
+    tdf7$hover = with(tdf7, paste(State, '<br>', "Education Level", round(PercentBS, 2)))
+    tdf7$hover2 = with(tdf7, paste(State, '<br>', "Death Rate", AADR))
     tdf7
     
   })
@@ -257,15 +258,15 @@ from Death group by Death.State having sum(Death.f_bs)/sum(Death.`edu.females`) 
   )
   
   output$map1 <- renderPlotly({plot_geo(df7(), locationmode = 'USA-states') %>%
-      add_trace(z= ~PercentBS, text = ~hover, color = ~PercentBS, colors = 'Purples', locations = ~State) %>%
-      colorbar(title = "Attainment %") %>%
-      layout(title = "Bachelor's Degree Attainment", geo = g)
+      add_trace(z= ~PercentBS, text = ~hover, color = ~PercentBS, colors = brewer.pal(3, "RdYlGn"), locations = ~State) %>%
+      colorbar(title = "Education Level") %>%
+      layout(title = "Education Level - LOW (Red) to HIGH (Green)", geo = g)
   })
   
   output$map2 <- renderPlotly({plot_geo(df7(), locationmode = 'USA-states') %>%
-      add_trace(z= ~AADR, text = ~hover2, color = ~AADR, colors = 'Purples', locations = ~State) %>%
-      colorbar(title = "AADR") %>%
-      layout(title = "AADR", geo = g)
+      add_trace(z= ~AADR, text = ~hover2, color = ~AADR, colors = rev(brewer.pal(3, "RdYlGn")), locations = ~State) %>%
+      colorbar(title = "Death Rate") %>%
+      layout(title = "Death Rate - HIGH (Red) to LOW (Green)", geo = g)
   })
   
   #End SNT3 Tab ___________________________
