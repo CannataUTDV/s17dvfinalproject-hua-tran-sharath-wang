@@ -21,7 +21,7 @@ This notebook documents the education attainment levels and age-adjusted death r
 **How to download dataset from Data.World:**
 
 1. Log into your account on https://data.world/
-2. Under the *Datasets* tab, go to "S17 eDV Project 6"
+2. Under the *Datasets* tab, go to "S17 DV Final Project"
 3. Scroll down until you reach "Death.csv"
 4. Click on download
 5. Save the file under a folder accessible by Tableau
@@ -44,6 +44,7 @@ source("../01 Data/ETL_Script.R")
 
 ### **Boxplot - Total death by cause**
 ![](../03 Visualizations/Boxplot - AmtDeath.PNG)
+
 This is a boxplot for each of the causes of death. The x-axis shows every cause of death, and the y-axis are the counts of the sepcific deatch cause for every state 
 every year. The Data shows that HEart Disease and Cancer show the highest counts of death and also the greatest variabiliy. Box plots for other causes 
 of death have less variability and less counts. 
