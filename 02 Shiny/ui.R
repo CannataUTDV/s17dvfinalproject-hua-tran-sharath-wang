@@ -10,11 +10,11 @@ dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Crosstab - AADR by State, Cause", tabName = "SNT1", icon = icon("dashboard")),
-      menuItem("Scatter - Death rate v Educatione", tabName = "SNT2", icon = icon("dashboard")),
-      menuItem("Barchart - AADR by Year,Cause", tabName = "NH1", icon = icon("dashboard")),
+      menuItem("Scatter - Death rate v Education", tabName = "SNT2", icon = icon("dashboard")),
+      menuItem("Barchart - Death rate by Year,Cause", tabName = "NH1", icon = icon("dashboard")),
       menuItem("SetID - BS Attainment: Female", tabName = "NH2", icon = icon("dashboard")),
       menuItem("SetID - BS Attainment: Male", tabName = "NH3", icon = icon("dashboard")),
-      menuItem("Map - AADR and Fraction BS", tabName = "SNT3", icon = icon("dashboard")),
+      menuItem("Map - Death rate and Education level", tabName = "SNT3", icon = icon("dashboard")),
       menuItem("Boxplot - Amount of Deaths per Cause", tabName = "NH4", icon = icon("dashboard")),
       menuItem("Histogram - AADR", tabName = "NH5", icon = icon("dashboard"))
    
@@ -123,7 +123,7 @@ tabItem(tabName = "SNT3",
                    hr(),
                    DT::dataTableOutput("mapData7")
           ),
-          tabPanel("Map - PercentBS", plotlyOutput("map2", height = 400), hr(), plotlyOutput("map1", height = 400))
+          tabPanel("Maps", plotlyOutput("map2", height = 400), hr(), plotlyOutput("map1", height = 400))
           )
         ),
 #End SNT3 Tab ___________________________________
