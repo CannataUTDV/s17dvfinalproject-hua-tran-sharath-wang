@@ -76,6 +76,7 @@ shinyServer(function(input, output) {
       theme(axis.text.x=element_text(angle=0, size=12, vjust=0.5)) + 
       theme(axis.text.y=element_text(size=12, hjust=0.5)) +
       geom_point(aes(x = `Percent BS`, y = sum_AADR, colour = State)) +
+      labs(x = "Education Level", y = "Death Rate") +
       expand_limits(y = 0, x = 0)
     #facet_wrap(~Gender)
   })
@@ -109,6 +110,7 @@ shinyServer(function(input, output) {
       theme(axis.text.y=element_text(size=1, hjust=1)) +
       geom_bar(stat = "identity") + 
       facet_wrap(~year, ncol=1) + 
+      labs(x = "Cause of Death", y = "Death Rate") +
       coord_flip() + 
       # Add sum_sales, and (sum_sales - window_avg_sales) label.
       geom_text(mapping=aes(x=cause, y=AADR, label=round(AADR)),colour="black", hjust=-.5, size = 1) +
@@ -123,6 +125,7 @@ shinyServer(function(input, output) {
       theme(axis.text.y=element_text(size=10, hjust=1)) +
       geom_bar(stat = "identity") + 
       facet_wrap(~year, ncol=2) + 
+      labs(x = "Cause of Death", y= "Death Rate") +
       coord_flip() + 
       # Add sum_sales, and (sum_sales - window_avg_sales) label.
       geom_text(mapping=aes(x=cause, y=AADR, label=round(AADR)),colour="black", hjust=-.5) +

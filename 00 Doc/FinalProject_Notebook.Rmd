@@ -40,6 +40,23 @@ source("../01 Data/ETL_Script.R")
 
 # **Visualizations**
 
+## **Interesting Visualizations**
+
+### **Decreasing death rate**
+![](../03 Visualizations/iBar_DeathYear.PNG)
+
+Death rate for each cause of death by year. **Average death rate (Red line) gradually decreases each year, visual evidence of increasing life span.** Death rate was normalized for population and age group variation.
+
+### **Negative correlation between death rate and education level**
+![](../03 Visualizations/iScatter_DeathvEdu.PNG)
+
+Death rate vs education level for every state. **There is a negative correlation between death rate and education level.** Education level was represented based on the proportion of the population that obtained a bachelor's degree.
+
+### **Localization of high death rate and low education in the southeastern US**
+![](../03 Visualizations/iMap_DeathEdu.PNG)
+
+Map of death rate and education level. **There is an apparent localization of high death rate coinciding with low education in the southeastern US states (RED)** 
+
 ## **Tableau**
 
 ### **Boxplot - Total death by cause**
@@ -116,7 +133,7 @@ This is a histogram of AADR by state. The x-axis are AADR bins starting at 580 a
 that fall into each bin. The histogram looks to be normal distribution with a small skew to the right. Additionally, there is a mini cluster in the 880-960
 AADR range. Most states fall into the 700-800 AADR range. 
 
-### **Scatterplot - AADR vs Fraction BS by State**
+### **Scatterplot - Normalized Death Rate vs Education Level by State**
 ![](../03 Visualizations/sScatterplot-AADR, BS.png)
 Scatterplot displays aggregate AADR vs fraction of BS attainment for each state. Note the negative correlation between AADR and BS attainment.
 
@@ -155,5 +172,4 @@ The page only shows the set of states that hosted low levels of male BS attainme
 ### **Map - AADR and BS Attainment Level Localization**
 ![](../03 Visualizations/sMap - AADR, BS.PNG)
 US map of states filled by Bachelor's degree attainment (top) and AADR (bottom). Note that localization of low degree attainment and high AADR coincide.
-
 
